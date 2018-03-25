@@ -11,13 +11,18 @@
     "posttest": "npm run lint && nsp check"
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
     "helmet": "^3.10.0",
     "loopback": "^3.0.0",
     "loopback-boot": "^2.6.5",
     "loopback-component-explorer": "^5.0.0",
     "loopback-connector-mongodb": "^3.4.2",
+    "mongoose": "^5.0.11",
+    "path": "^0.12.7",
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^2.0.0"
   },
