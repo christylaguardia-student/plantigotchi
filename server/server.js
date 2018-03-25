@@ -1,8 +1,11 @@
 'use strict';
-
+const express = require('express')
+const router = express.Router();
 var loopback = require('loopback');
 var boot = require('loopback-boot');
-
+const connect = require('./src/connect');
+const http = require('http');
+const dbUri = process.env.MONGODB_URI || 'mongodb://plant:igotchi@ds155080.mlab.com:55080/plantigotchi';
 var app = module.exports = loopback();
 
 app.start = function() {
@@ -27,3 +30,6 @@ boot(app, __dirname, function(err) {
   if (require.main === module)
     app.start();
 });
+
+
+module.exports = loopback()
