@@ -9,19 +9,29 @@
   "properties": {
     "name": {
       "type": "string",
-      "required": true,
-      "default": "my plant"
+      "required": true
     },
     "species": {
       "type": "string",
       "required": true
     },
     "dob": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "type": {
-      "type": "enum",
-      "required": true
+      "type": [
+        "string"
+      ],
+      "required": true,
+      "default": [
+        "medium"
+      ]
+    },
+    "soilType": {
+      "type": [
+        "string"
+      ]
     },
     "moistureRange": {
       "type": "object",
@@ -34,13 +44,6 @@
   },
   "validations": [],
   "relations": {},
-  "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW"
-    }
-  ],
+  "acls": [],
   "methods": {}
 }
