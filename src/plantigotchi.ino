@@ -22,9 +22,9 @@ Servo myservo;  // create servo object to control a servo
 bool ran; //variable to tell if you need to water plant
 int analogPin = A0;     // moisture sensor connected to analog pin A0, our ADC pin
                        // outside leads to ground and +5V
-int analogReadValue;       // variable to store the value read
 
 //*** setup functions ***//
+
 void setupWifi() {
   for(uint8_t t = 4; t > 0; t--) {
     Serial.printf("[SETUP] WAIT %d...\n", t);
@@ -45,15 +45,23 @@ void setupServo() {
   ran = true;
 }
 
-//*** christy still working on this ***//
-//*** makes an http POST ***//
-void recordSensorReading() {
-  HTTPClient http;
-  http.begin("http://localhost:3000/api/plants");
-  http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+void getSensorReading() {
+
+  //*** reads the moisture in the soil  ***//
   
-  String analogReadValueAsString = String(analogReadValue);
-  int httpCode = http.POST(analogReadValueAsString);
+  moisture = analogRead(sensorpin);
+  Serial.println(moisture);
+
+  //*** sends the reading to the server  ***//
+  
+  HTTPClient http;
+  http.begin("http://10.0.12.192:3000/"); // use your ip address when running server locally
+  http.addHeader("Content-Type", "application/json");
+
+  char moistureString [50];
+  sprintf(moistureString, "{ \"moisture\": %d }", moisture); // create json object to send to the server
+  Serial.printf("%s\n", moistureString);
+  int httpCode = http.POST(moistureString);
   
   if(httpCode > 0) {  // check if success, httpCode will be negative on error
     Serial.printf("[HTTP] POST... code: %d\n", httpCode);
@@ -66,23 +74,16 @@ void recordSensorReading() {
   }
   
   http.end();
-}
-
-//*** reads the moisture in the soil  ***//
-void getSensorReading() {
-
-  moisture = analogRead(sensorpin);
+  
+  //*** determines if plant needs water  ***//
   
   if (moisture >= SOAKED  &&  lastWaterVal < MOIST) {
-    Serial.println(moisture);
     Serial.println("Thank you for watering me!");  
   }
   else if  (moisture >= SOAKED  &&  lastWaterVal >= MOIST ) {
-    Serial.println(moisture);
     Serial.println("You over watered me");
   }
   else if  (moisture < SOAKED  &&  lastWaterVal < MOIST ) {
-    Serial.println(moisture);
     Serial.println("You didn't water me enough");
     
     //*** water the plant ***//
@@ -112,7 +113,7 @@ void getSensorReading() {
 //*** runs at startup ***//
 void setup() {
   Serial.begin(115200); //baud rate
-//  setupWifi();
+  setupWifi();
   setupServo();
 }
 
