@@ -1,0 +1,46 @@
+body{
+  background-color: #E9ECEE;
+}
+
+/* TOP OF PAGE */
+
+.logo {
+  width: 300px;
+}
+
+.hero-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.hero-left {
+  padding: 15px;
+  width: 50%;
+  height: 100vh;
+  background-color: #FFF;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.hero {
+  background-image: url("assets/hero.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 50%;
+  height: 100vh;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+  margin-top: 40px;
+}
+
+.list-group-item{
+  width: 90vw;
+  margin: 5px;
+}
