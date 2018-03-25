@@ -1,6 +1,8 @@
 body{
-  background-color: #F0F7EE;
+  background-color: #E9ECEE;
 }
+
+/* TOP OF PAGE */
 
 .logo {
   width: 300px;
@@ -19,6 +21,7 @@ body{
   height: 100vh;
   background-color: #FFF;
   display: flex;
+  align-items: flex-end;
   justify-content: center;
   flex-direction: column;
 }
@@ -31,7 +34,13 @@ body{
   height: 100vh;
 }
 
-.jumbotron {
-  background-color: #FFF;
-  padding: 15px;
+/* DASHBOARD */
+
+.dashboard{
+  margin-top: 40px;
+}
+
+.list-group-item{
+  width: 90vw;
+  margin: 5px;
 }
